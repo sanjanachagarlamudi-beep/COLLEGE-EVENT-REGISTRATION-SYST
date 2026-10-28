@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="College Event Registration System">
+  <title>CampusEvents | College Event Registration</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="CampusEvents home"><span class="brand-mark">C</span><span>Campus<span class="brand-accent">Events</span></span></a>
+    <nav><a href="#events">Explore events</a><button id="myRegistrationsNav" class="link-button hidden">My registrations</button></nav>
+    <div class="account-actions"><span id="userLabel" class="user-label"></span><button id="loginOpen" class="button button-ghost">Log in</button><button id="registerOpen" class="button button-primary">Join now</button><button id="logoutButton" class="button button-ghost hidden">Log out</button></div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy"><span class="eyebrow"><span class="live-dot"></span> YOUR CAMPUS, YOUR MOMENT</span>
+        <h1>Make room for<br><span>something amazing.</span></h1>
+        <p>Discover workshops, cultural fests, tech talks and campus experiences. Find your next event and save your spot in seconds.</p>
+        <a class="button button-light" href="#events">Explore upcoming events <span aria-hidden="true">↗</span></a>
+        <div class="hero-stats"><div><strong id="eventCount">—</strong><span>Upcoming events</span></div><div><strong>100%</strong><span>Campus spirit</span></div><div><strong>One place</strong><span>All your events</span></div></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-card"><span class="art-tag">UP NEXT</span><div class="art-date"><strong>24</strong><span>NOV</span></div><div class="art-lines"><i></i><i></i><i></i></div><span class="art-spark">✦</span></div><div class="art-sticker sticker-a">✳</div><div class="art-sticker sticker-b">✦</div><div class="art-caption">Ideas happen<br>when we meet.</div></div>
+    </section>
+    <section id="events" class="events-section">
+      <div class="section-heading"><div><span class="eyebrow">WHAT'S HAPPENING</span><h2>Find your next <span>thing.</span></h2><p class="muted">Good people. Great ideas. Unforgettable campus moments.</p></div><div class="event-tools"><label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="Search events..." aria-label="Search events"></label><select id="categoryFilter" aria-label="Filter by category"><option value="">All categories</option><option>Technology</option><option>Workshop</option><option>Cultural</option><option>Sports</option><option>Career</option><option>Other</option></select></div></div>
+      <div id="notice" class="notice hidden" role="status"></div>
+      <div id="eventsGrid" class="events-grid"><div class="loading-card">Loading campus events…</div></div>
+      <div id="emptyState" class="empty-state hidden"><div class="empty-icon">✳</div><h3>No events found</h3><p>Try a different search or check back soon.</p></div>
+    </section>
+    <section id="registrationsSection" class="registrations-section hidden"><div class="section-heading"><div><span class="eyebrow">YOUR PLANS</span><h2>My registrations<span>.</span></h2><p class="muted">Your saved spots, all in one place.</p></div></div><div id="registrationsList" class="registration-list"></div></section>
+    <section id="adminSection" class="admin-section hidden"><div class="section-heading"><div><span class="eyebrow">EVENT CONTROL</span><h2>Admin <span>workspace.</span></h2><p class="muted">Create events and keep your campus calendar up to date.</p></div></div>
+      <div class="admin-layout"><form id="eventForm" class="panel form-panel"><h3 id="eventFormTitle">Create an event</h3><input type="hidden" id="eventId">
+        <label>Event title<input id="eventTitle" maxlength="120" required placeholder="e.g. Buildathon 2026"></label>
+        <div class="form-row"><label>Category<select id="eventCategory" required><option>Technology</option><option>Workshop</option><option>Cultural</option><option>Sports</option><option>Career</option><option>Other</option></select></label><label>Capacity<input id="eventCapacity" type="number" min="1" max="10000" value="100" required></label></div>
+        <div class="form-row"><label>Date and time<input id="eventDate" type="datetime-local" required></label><label>Venue<input id="eventVenue" maxlength="160" required placeholder="Main auditorium"></label></div>
+        <label>Description<textarea id="eventDescription" rows="4" maxlength="2000" required placeholder="What should students know?"></textarea></label>
+        <div class="form-actions"><button class="button button-primary" type="submit" id="saveEventButton">Publish event</button><button class="button button-ghost hidden" type="button" id="cancelEditButton">Cancel edit</button></div>
+      </form><div class="panel admin-events"><h3>Manage events</h3><div id="adminEventsList"></div></div></div>
+    </section>
+  </main>
+  <footer><a class="brand footer-brand" href="/"><span class="brand-mark">C</span><span>Campus<span class="brand-accent">Events</span></span></a><p>Made for campus life. Built to bring people together.</p><span>© <span id="year"></span> CampusEvents</span></footer>
+  <dialog id="authDialog" class="dialog"><button class="dialog-close" id="authClose" aria-label="Close dialog">×</button><div class="dialog-kicker">WELCOME TO CAMPUS</div><h2 id="authTitle">Good things start here.</h2><p id="authSubtitle" class="muted">Log in to register for events and manage your plans.</p><form id="authForm"><label id="nameField" class="hidden">Full name<input id="fullName" autocomplete="name" maxlength="100"></label><label>Email address<input id="authEmail" type="email" autocomplete="email" required maxlength="254" placeholder="you@college.edu"></label><label>Password<input id="authPassword" type="password" autocomplete="current-password" minlength="8" required maxlength="128" placeholder="At least 8 characters"></label><div id="authError" class="form-error hidden" role="alert"></div><button id="authSubmit" class="button button-primary button-wide" type="submit">Log in</button></form><p class="switch-auth"><span id="switchText">New here?</span> <button id="switchAuth" class="text-button">Create an account</button></p></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
